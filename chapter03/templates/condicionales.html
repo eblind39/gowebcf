@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Invocado desde condicionales.go</title>
+    </head>
+    <body>
+        <h3>Hola {{ .UserName }}</h3>
+        <p>Edad {{ .Edad }}</p>
+
+        {{ if .Activo }}
+            <p>El usuario está activo en la plataforma</p>
+        {{ else }}
+            <p>El usuario NO está activo en la plataforma</p>
+        {{ end }}
+
+        {{ if (and .Activo .Administrador) }}
+            <p>Eres administrador activo</p>
+        {{ end }}
+
+        <!-- otros operadores booleanos -->
+        <!-- and && -->
+        <!-- or || -->
+        <!-- eq == -->
+        <!-- ne != -->
+        <!-- lt < -->
+        <!-- gt > -->
+        <!-- le <= -->
+        <!-- ge >= -->
+    </body>
+</html>

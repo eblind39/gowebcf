@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Invocado desde variables.go</title>
+    </head>
+    <body>
+        <!-- hacer uso de la palabra reservada with -->
+        {{ with $valor := true }}
+            <p> {{ $valor }} </p>
+
+            {{ if $valor }}
+                <p>Verdadero</p>
+            {{ end }}
+        {{ end }}
+    </body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Invocado desde metodos.go</title>
+    </head>
+    <body>
+        {{ if .TienePermisoAdministrador "ok" }}
+            <p>Es administrado activo, con llave aceptada</p>
+        {{ else }}
+            <p>NO es administrado activo, con llave aceptada</p>
+        {{ end }}
+    </body>
+</html>
