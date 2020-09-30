@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type UsuarioF struct {
+type UsuarioM struct {
 	UserName      string
 	Edad          int
 	Activo        bool
@@ -19,12 +19,11 @@ func FnTemplateHTMLMult(w http.ResponseWriter, r *http.Request) {
 		"suma": suma,
 	}
 
-	template, err := template.New("multiples.html").Funcs(funciones).ParseFiles("templates/multiples.html", "templates/footer.html")
-	if err != nil {
-		panic(err)
-	}
+	//template, err := template.New("multiples.html").Funcs(funciones).ParseFiles("templates/multiples.html", "templates/footer.html")
+	// o ejecutar el template con Must, para gestionar mejor la captura de errores
+	template := template.Must(template.New("multiples.html").Funcs(funciones).ParseFiles("templates/multiples.html", "templates/footer.html"))
 
-	usuario := UsuarioF{
+	usuario := UsuarioM{
 		UserName:      "Ernesto",
 		Edad:          24,
 		Activo:        true,
@@ -33,7 +32,7 @@ func FnTemplateHTMLMult(w http.ResponseWriter, r *http.Request) {
 	template.Execute(w, usuario)
 }
 
-func (this UsuarioF) TienePermisoAdministrador(llave string) bool {
+func (this UsuarioM) TienePermisoAdministrador(llave string) bool {
 	return this.Activo && this.Administrador && llave == "ok"
 }
 

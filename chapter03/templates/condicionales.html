@@ -16,6 +16,10 @@
             <p>Eres administrador activo</p>
         {{ end }}
 
+        {{ if gt .Edad 20 }}
+            <p>El usuario es mayor de 20 años</p>
+        {{ end }}
+
         <!-- otros operadores booleanos -->
         <!-- and && -->
         <!-- or || -->

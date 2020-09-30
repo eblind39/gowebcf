@@ -1,0 +1,14 @@
+{{ define "executempl" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Invocado desde executempl.go</title>
+    </head>
+    <body>
+        <h4>Haciendo uso de ejecución de templates bajo demanda</h4>
+        <p>{{ .UserName }}</p>
+
+        {{ template "footer" }}
+    </body>
+</html>
+{{ end }}

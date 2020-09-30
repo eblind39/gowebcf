@@ -1,0 +1,17 @@
+{{ define "error" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ .ErrorTitle }}</title>
+    </head>
+    <body>
+        <h4>Código de error:</h4>
+        <h2> {{ .ErrorCodeC }} </h2>
+
+        <h4>Descripción:</h4>
+        <h2> {{ .ErrorMsgC }} </h2>
+        
+        {{ template "footer" }}
+    </body>
+</html>
+{{ end }}

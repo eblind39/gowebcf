@@ -1,0 +1,19 @@
+{{ define "usuario" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Invocado desde rendertempl.go</title>
+    </head>
+    <body>
+        <h4>Uso de renderTemplate</h4>
+
+        {{ if .UserName }}
+            <p>Hola: {{ .UserName }}</p>
+        {{ else }}
+            <p>No se seteó el nombre de usuario</p>
+        {{ end }}
+
+        {{ template "footer" }}
+    </body>
+</html>
+{{ end }}

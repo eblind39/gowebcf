@@ -1,0 +1,14 @@
+{{ define "estatico" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Invocado desde static.go</title>
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    </head>
+    <body>
+        <h4>Usando archivos estáticos en template</h4>
+
+        {{ template "footer" }}
+    </body>
+</html>
+{{ end }}
