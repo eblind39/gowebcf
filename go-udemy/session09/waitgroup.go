@@ -5,6 +5,7 @@ import (
 	"math"
 	"runtime"
 	"sync"
+	"sync/atomic"
 )
 
 var wg sync.WaitGroup
@@ -52,6 +53,26 @@ func main() {
 	}
 	wgwg.Wait()
 	fmt.Println("Cuenta: ", contador)
+	// Race condition -
+
+	// Race condition -
+	// To detect race conditions in code:
+	// $  go build -race waitgroup.go
+	// and exec file
+	var counter int64 = 0
+	var wgwgwg sync.WaitGroup
+	wgwgwg.Add(gs)
+	for i:=0; i<gs; i++ {
+		go func() {
+			atomic.AddInt64(&counter, 1)
+			runtime.Gosched()
+			fmt.Println("Counter: ", atomic.LoadInt64(&counter))
+			wgwgwg.Done()
+		}()
+		fmt.Println("Número de Gorutinas ", runtime.NumGoroutine())
+	}
+	wgwgwg.Wait()
+	fmt.Println("Cuenta: ", counter)
 	// Race condition -
 }
 
