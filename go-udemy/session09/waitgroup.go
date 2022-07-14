@@ -29,23 +29,30 @@ func main() {
 	wg.Wait()
 
 
-	// Race condition
+	// Race condition -
+	// To detect race conditions in code:
+	// $  go build -race waitgroup.go
+	// and exec file
 	var contador int = 0
 	var wgwg sync.WaitGroup
+	var mux sync.Mutex
 	const gs = 100
 	wgwg.Add(gs)
 	for i:=0; i<gs; i++ {
 		go func() {
+			mux.Lock()
 			var v int = contador
 			v++
 			runtime.Gosched()
 			contador = v
+			mux.Unlock()
 			wgwg.Done()
 		}()
 		fmt.Println("Número de Gorutinas ", runtime.NumGoroutine())
 	}
 	wgwg.Wait()
 	fmt.Println("Cuenta: ", contador)
+	// Race condition -
 }
 
 func foo() {
