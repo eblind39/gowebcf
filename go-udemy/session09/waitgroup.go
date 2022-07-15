@@ -6,11 +6,15 @@ import (
 	"runtime"
 	"sync"
 	"sync/atomic"
+
+	"github.com/eblind39/gowebcf/go-udemy/session09/samplepkg"
 )
 
 var wg sync.WaitGroup
 
 func main() {
+	samplepkg.Hello()
+
 	fmt.Println("\t\tOS: ", runtime.GOOS)
 	fmt.Println("\t\tARCH: ", runtime.GOARCH)
 	fmt.Println("\t\tCPUs: ", runtime.NumCPU())
@@ -26,9 +30,9 @@ func main() {
 		wg.Done()
 	}()
 	fmt.Println("bar: ", <-result)
-
+        
 	wg.Wait()
-
+	close(result)
 
 	// Race condition -
 	// To detect race conditions in code:
@@ -39,7 +43,7 @@ func main() {
 	var mux sync.Mutex
 	const gs = 100
 	wgwg.Add(gs)
-	for i:=0; i<gs; i++ {
+	for i := 0; i < gs; i++ {
 		go func() {
 			mux.Lock()
 			var v int = contador
@@ -62,7 +66,7 @@ func main() {
 	var counter int64 = 0
 	var wgwgwg sync.WaitGroup
 	wgwgwg.Add(gs)
-	for i:=0; i<gs; i++ {
+	for i := 0; i < gs; i++ {
 		go func() {
 			atomic.AddInt64(&counter, 1)
 			runtime.Gosched()
@@ -77,14 +81,14 @@ func main() {
 }
 
 func foo() {
-	for i:=0; i<10; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Println("foo: ", i)
 	}
 	wg.Done()
 }
 
 func bar(number int) int {
-	for i:=0; i<10000; i++ {
+	for i := 0; i < 10000; i++ {
 		number = int(math.Pow(float64(number), 2))
 		number = int(math.Pow(float64(number), 0.5))
 	}
