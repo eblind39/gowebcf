@@ -29,7 +29,6 @@ func parallelMutex() {
 		go func() {
 			mux.Lock()
 			var tmp int = counter
-			runtime.Gosched()
 			tmp--
 			counter = tmp
 			mux.Unlock()
@@ -53,8 +52,8 @@ func parallelAtomic() {
 			atomic.AddInt32(&counter, -1)
 			runtime.Gosched()
 			wg.Done()
-			fmt.Println("parallelAtomic gorutine #'s", runtime.NumGoroutine())
 		}()
+		fmt.Println("parallelAtomic gorutine #'s", runtime.NumGoroutine())
 	}
 	wg.Wait()
 	fmt.Println("parallelAtomic Counter", counter)
