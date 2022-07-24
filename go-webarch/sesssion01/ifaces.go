@@ -25,6 +25,10 @@ func (sa scientist) speak() {
 	fmt.Println("I'm a scientist - this is my name: ", sa.first)
 }
 
+func globalSpeak(h human) {
+	h.speak()
+}
+
 func main() {
 	p1 := person{
 		first: "Karl Jung",
@@ -45,4 +49,9 @@ func main() {
 	fmt.Printf("%T\n", sc1)
 	fmt.Printf("%T\n", x)
 	fmt.Printf("%T\n", y)
+
+	globalSpeak(p1)
+	globalSpeak(sc1)
+	globalSpeak(x)
+	globalSpeak(y)
 }
