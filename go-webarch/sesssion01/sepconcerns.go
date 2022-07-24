@@ -204,6 +204,7 @@ func (j *JsonOverHTTP) GetUser(w http.ResponseWriter, r *http.Request) {
 // curl -v -XGET localhost:8080/user?email=eblind39@gmail.com
 // curl -v localhost:8080/user?email=eblind39@gmail.com
 // curl localhost:8080/user?email=eblind39@gmail.com
+// https://curlbuilder.com/
 func main() {
 	usrStor := NewMemoryUserStorage()
 	usrServ := NewUserServiceImpl(usrStor)
