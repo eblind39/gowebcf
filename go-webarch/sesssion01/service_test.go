@@ -18,7 +18,7 @@ func TestPut(t *testing.T) {
 	acc.EXPECT().Save(1, p).MinTimes(1).MaxTimes(1)
 
 	// Put(acc, 2, p) // Fail
-	PutAcc(acc, 1, p) // Pass
+	Put(acc, 1, p) // Pass
 
 	ctl.Finish()
 }

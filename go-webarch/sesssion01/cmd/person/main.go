@@ -20,16 +20,14 @@ func main() {
 	}
 
 	// Using a service
-	psm := architecture.NewPersonService(dbm)
-	psm.Put(1, p1)
-	psm.Put(2, p2)
-	fmt.Println(psm.Get(1))
-	fmt.Println(psm.Get(3))
+	architecture.Put(dbm, 1, p1)
+	architecture.Put(dbm, 2, p2)
+	fmt.Println(architecture.Get(dbm, 1))
+	fmt.Println(architecture.Get(dbm, 3))
 
 	// or store in another data store
-	psp := architecture.NewPersonService(dbp)
-	psp.Put(1, p1)
-	psp.Put(2, p2)
-	fmt.Println(psp.Get(1))
-	fmt.Println(psp.Get(2))
+	architecture.Put(dbp, 1, p1)
+	architecture.Put(dbp, 2, p2)
+	fmt.Println(architecture.Get(dbp, 1))
+	fmt.Println(architecture.Get(dbp, 2))
 }
