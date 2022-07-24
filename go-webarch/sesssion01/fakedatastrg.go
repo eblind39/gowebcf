@@ -28,11 +28,20 @@ type accesor interface {
 	retrieve(n int) personn
 }
 
-func put(a accesor, n int, p personn) {
-	a.save(n, p)
+type personService struct {
+	a accesor
 }
-func get(a accesor, n int) personn {
-	return a.retrieve(n)
+
+func (ps personService) put(n int, p personn) {
+	ps.a.save(n, p)
+}
+
+func (ps personService) get(n int) (personn, error) {
+	p := ps.a.retrieve(n)
+	if p.first == "" {
+		return personn{}, fmt.Errorf("No person with n of %d", n)
+	}
+	return p, nil
 }
 
 func main() {
@@ -47,14 +56,21 @@ func main() {
 		first: "Cooper",
 	}
 
-	put(dbm, 1, p1)
-	put(dbm, 2, p2)
-	fmt.Println(get(dbm, 1))
-	fmt.Println(get(dbm, 2))
+	// Using a service
+	psm := personService{
+		a: dbm,
+	}
+	psm.put(1, p1)
+	psm.put(2, p2)
+	fmt.Println(psm.get(1))
+	fmt.Println(psm.get(3))
 
 	// or store in another data store
-	put(dbp, 1, p1)
-	put(dbp, 2, p2)
-	fmt.Println(get(dbp, 1))
-	fmt.Println(get(dbp, 2))
+	psp := personService{
+		a: dbp,
+	}
+	psp.put(1, p1)
+	psp.put(2, p2)
+	fmt.Println(psp.get(1))
+	fmt.Println(psp.get(2))
 }
