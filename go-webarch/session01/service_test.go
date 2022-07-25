@@ -6,7 +6,7 @@ import (
 )
 
 // using gomock
-// mockgen -source service.go -destination mock_test.go -package architecture -self_package github.com/eblind39/gowebcf/go-webarch/sesssion01
+// mockgen -source service.go -destination mock_test.go -package architecture -self_package github.com/eblind39/gowebcf/go-webarch/session01
 func TestPut(t *testing.T) {
 	ctl := gomock.NewController(t)
 	acc := NewMockAccesor(ctl)

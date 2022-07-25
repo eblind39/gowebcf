@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"github.com/eblind39/gowebcf/go-webarch/sesssion01"
+	"github.com/eblind39/gowebcf/go-webarch/session01"
 )
 
 type Db map[int]architecture.Persona

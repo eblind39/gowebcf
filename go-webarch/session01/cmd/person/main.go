@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/eblind39/gowebcf/go-webarch/sesssion01"
-	"github.com/eblind39/gowebcf/go-webarch/sesssion01/storage/mongo"
-	"github.com/eblind39/gowebcf/go-webarch/sesssion01/storage/postgres"
+	"github.com/eblind39/gowebcf/go-webarch/session01"
+	"github.com/eblind39/gowebcf/go-webarch/session01/storage/mongo"
+	"github.com/eblind39/gowebcf/go-webarch/session01/storage/postgres"
 )
 
 func main() {
