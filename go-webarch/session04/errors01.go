@@ -23,9 +23,12 @@ func (e ErrFileNotFound) Is(other error) bool {
 var ErrNotExist = fmt.Errorf("File does not exist")
 var ErrUserNotExist = errors.New("User does not exist")
 
+func openFile(filename string) (string, error) {
+	return "", ErrNotExist
+}
+
 func main() {
 	err := ErrUserNotExist
-
 	if err == ErrUserNotExist {
 		fmt.Println("You need to register first!")
 	} else {
@@ -36,8 +39,15 @@ func main() {
 		Filename: "test.txt",
 		When:     time.Now(),
 	}
-
 	fmt.Println(errF)
-
 	fmt.Println(errors.Is(errF, ErrFileNotFound{}))
+
+	_, errOF := openFile("test.txt")
+	if errOF != nil {
+		wrappedErr := fmt.Errorf("Unable to open file %v, %w", "test.txt", errOF)
+		if errors.Is(wrappedErr, ErrNotExist) {
+			fmt.Println("This is an ErrNotExist")
+		}
+		panic(wrappedErr)
+	}
 }
