@@ -35,6 +35,16 @@ func openFiledef2(filename string) (string, error) {
 	}
 }
 
+func processFile(filename string) error {
+	_, err := openFiledef(filename)
+	if err != nil {
+		return fmt.Errorf("Error while opening file: %w", err)
+	}
+	// Do work on stuff
+
+	return nil
+}
+
 func main() {
 	_, err := openFiledef("test.txt")
 	if err != nil {
@@ -51,5 +61,10 @@ func main() {
 			fmt.Println("This is an ErrorNotExist")
 		}
 		fmt.Println(err)
+	}
+
+	errPF := processFile("test.txt")
+	if errPF != nil {
+		fmt.Println("Error while processing file")
 	}
 }
