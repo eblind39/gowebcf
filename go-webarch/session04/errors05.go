@@ -26,11 +26,21 @@ type writeFile struct {
 	err error
 }
 
-func newWriteFile(filename string) writeFile {
+func newWriteFile(filename string) *writeFile {
 	f, err := os.Create(filename)
-	return writeFile{
+	if err != nil {
+		return &writeFile{
+			f: f,
+			err: writeFileError{
+				op:  "Create",
+				err: fmt.Errorf("Error whilte creating a file: %w", err),
+			},
+		}
+	}
+
+	return &writeFile{
 		f:   f,
-		err: err,
+		err: nil,
 	}
 }
 
@@ -49,13 +59,16 @@ func (w *writeFile) writeString(text string) {
 }
 
 func (w *writeFile) Close() {
-	if w.err != nil {
+	if w.f == nil {
 		return
 	}
 
 	err := w.f.Close()
 	if err != nil {
-		w.err = err
+		w.err = writeFileError{
+			op:  "Close",
+			err: fmt.Errorf("Failed while closing file: %w", err),
+		}
 	}
 }
 
@@ -69,6 +82,14 @@ func main() {
 	f.writeString("Hello World!")
 	f.writeString("More text")
 	f.Close()
+
+	/*err := f.Err()
+	var fErr *writeFileError
+	if errors.As(err, &fErr) {
+		if fErr.op == "Close" {
+			fmt.Println("Error happened while closing file")
+		}
+	}*/
 
 	err := f.Err()
 	if err != nil {
