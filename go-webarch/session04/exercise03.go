@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fooErr := foo()
+	fooErr := fooFn()
 	barErr := errors.Unwrap(fooErr)
 	mooErr := errors.Unwrap(barErr)
 	catErr := errors.Unwrap(mooErr)
@@ -18,18 +18,18 @@ func main() {
 	fmt.Printf("baseErr\n\t%s\n\n", baseErr)
 }
 
-func foo() error {
-	return fmt.Errorf("This error is from FOO: %w", bar())
+func fooFn() error {
+	return fmt.Errorf("This error is from FOO: %w", barFn())
 }
 
-func bar() error {
-	return fmt.Errorf("This error is from BAR: %w", moo())
+func barFn() error {
+	return fmt.Errorf("This error is from BAR: %w", mooFn())
 }
 
-func moo() error {
-	return fmt.Errorf("This error is from MOO: %w", cat())
+func mooFn() error {
+	return fmt.Errorf("This error is from MOO: %w", catFn())
 }
 
-func cat() error {
+func catFn() error {
 	return errors.New("This error is from CAT")
 }
