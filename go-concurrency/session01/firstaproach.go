@@ -5,7 +5,8 @@ import (
 	"sync"
 )
 
-func printSomething(s string) {
+func printSomething(s string, wg *sync.WaitGroup) {
+	defer wg.Done()
 	fmt.Println(s)
 }
 
@@ -27,12 +28,11 @@ func main() {
 	wg.Add(len(words))
 
 	for i, x := range words {
-		func() {
-			go printSomething(fmt.Sprintf("%d: %s", i, x))
-			wg.Done()
-		}()
+		go printSomething(fmt.Sprintf("%d: %s", i, x), &wg)
 	}
 	wg.Wait()
 
-	printSomething("This is the last thing to be printed!")
+	wg.Add(1)
+	printSomething("This is the last thing to be printed!", &wg)
+	wg.Wait()
 }
