@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/fatih/color"
+	"strings"
 	"sync"
 	"time"
 )
@@ -24,6 +25,8 @@ var wg sync.WaitGroup
 var sleepTime = 1 * time.Second
 var eatTime = 2 * time.Second
 var thinkTime = 1 * time.Second
+var orderFinished []string
+var orderMutex sync.Mutex
 
 func diningProblem(philosopher string, leftFork, rightFork *sync.Mutex) {
 	defer wg.Done()
@@ -63,6 +66,9 @@ func diningProblem(philosopher string, leftFork, rightFork *sync.Mutex) {
 	time.Sleep(sleepTime)
 
 	color.Cyan("%s has left the table.\n", philosopher)
+	orderMutex.Lock()
+	orderFinished = append(orderFinished, philosopher)
+	orderMutex.Unlock()
 }
 
 func main() {
@@ -87,4 +93,6 @@ func main() {
 	wg.Wait()
 
 	color.Cyan("The table is empty.")
+	color.Cyan("-------------------")
+	color.Cyan("Order finished: %s\n", strings.Join(orderFinished, ", "))
 }
