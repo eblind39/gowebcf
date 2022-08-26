@@ -9,13 +9,14 @@ require (
 )
 
 require (
-	github.com/alexedwards/scs/redisstore v0.0.0-20220528130143-d93ace5be94b // indirect
-	github.com/alexedwards/scs/v2 v2.5.0 // indirect
+	github.com/alexedwards/scs/redisstore v0.0.0-20220528130143-d93ace5be94b
+	github.com/alexedwards/scs/v2 v2.5.0
 	github.com/fatih/color v1.13.0 // indirect
-	github.com/go-chi/chi/v5 v5.0.7 // indirect
+	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/goccy/go-json v0.9.8 // indirect
 	github.com/golang/mock v1.6.0 // indirect
+	github.com/gomodule/redigo v1.8.0
 	github.com/jackc/pgconn v1.13.0
 	github.com/jackc/pgx/v4 v4.17.0
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
