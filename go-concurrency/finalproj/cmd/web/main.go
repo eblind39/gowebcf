@@ -23,6 +23,8 @@ import (
 
 const webPort = "3007"
 
+// execute on Ubuntu: make start
+// stopping: make stop
 func main() {
 	// connect to the database
 	db := initDB()
