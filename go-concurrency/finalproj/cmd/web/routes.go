@@ -21,7 +21,7 @@ func (app *Config) routes() http.Handler {
 	mux.Get("/logout", app.Logout)
 	mux.Get("/register", app.RegisterPage)
 	mux.Post("/register", app.PostRegisterPage)
-	mux.Get("/activate-account", app.ActivateAccount)
+	mux.Get("/activate", app.ActivateAccount)
 
 	// then goto - http://localhost:8025/
 	mux.Get("/test-email", func(w http.ResponseWriter, r *http.Request) {
