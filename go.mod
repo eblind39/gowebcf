@@ -15,6 +15,8 @@ require (
 
 require github.com/bwmarrin/go-alone v0.0.0-20190806015146-742bb55d1631
 
+require github.com/phpdave11/gofpdf v1.4.2
+
 require (
 	github.com/alexedwards/scs/redisstore v0.0.0-20220528130143-d93ace5be94b
 	github.com/alexedwards/scs/v2 v2.5.0
