@@ -48,11 +48,14 @@ func TestMain(m *testing.M) {
 	}
 
 	go func() {
-		select {
-		case <-testApp.Mailer.MailerChan:
-		case <-testApp.Mailer.ErroChan:
-		case <-testApp.Mailer.DoneChan:
-			return
+		for {
+			select {
+			case <-testApp.Mailer.MailerChan:
+				testApp.Wait.Done()
+			case <-testApp.Mailer.ErroChan:
+			case <-testApp.Mailer.DoneChan:
+				return
+			}
 		}
 	}()
 
