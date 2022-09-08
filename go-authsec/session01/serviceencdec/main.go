@@ -29,5 +29,11 @@ func encode(w http.ResponseWriter, r *http.Request) {
 }
 
 func decode(w http.ResponseWriter, r *http.Request) {
+	var s1 shape
+	err := json.NewDecoder(r.Body).Decode(&s1)
+	if err != nil {
+		log.Println("Decoded bad data: ", s1)
+	}
 
+	log.Println("Shape: ", s1)
 }
