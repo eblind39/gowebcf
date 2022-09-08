@@ -19,6 +19,7 @@ func main() {
 		Name: "square",
 	}
 
+	// -------Marshall
 	xs := []shape{s1, s2}
 
 	bs, err := json.Marshal(xs)
@@ -26,5 +27,15 @@ func main() {
 		log.Panic(err)
 	}
 
-	fmt.Println(string(bs))
+	fmt.Println("JSON string: ", string(bs))
+
+	// -------Unmarshall
+	var xs2 []shape
+
+	err = json.Unmarshal(bs, &xs2)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	fmt.Println("Back into a Go data structure", xs2)
 }
