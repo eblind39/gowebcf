@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -19,6 +20,21 @@ func everything(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		c = &http.Cookie{}
 	}
+
+	isEqual := true
+	xs := strings.SplitN(c.Value, "|", 2)
+	if len(xs) == 2 {
+		cCode := xs[0]
+		cEmail := xs[1]
+		code := getCode(cEmail)
+		isEqual = hmac.Equal(cCode, code)
+	}
+
+	message := "Not logged in"
+	if isEqual {
+		message = "Logged in"
+	}
+
 	html := `<!DOCTYPE html>
 			<html lang="en">
 			  <head>
@@ -26,10 +42,10 @@ func everything(w http.ResponseWriter, r *http.Request) {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<meta http-equiv="X-UA-Compatible" content="ie=edge">
 				<title>HMAC Example</title>
-				<link rel="stylesheet" href="style.css">
 			  </head>
 			  <body>
 				<p>Cookie value: ` + c.Value + `</p>
+				<p>` + message + `</p>
 				<form action="/submit" method="post">
 					<input type="text" name="email" />
 					<input type="submit" />
