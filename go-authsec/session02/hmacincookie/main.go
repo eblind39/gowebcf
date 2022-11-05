@@ -27,7 +27,7 @@ func everything(w http.ResponseWriter, r *http.Request) {
 		cCode := xs[0]
 		cEmail := xs[1]
 		code := getCode(cEmail)
-		isEqual = hmac.Equal(cCode, code)
+		isEqual = hmac.Equal([]byte(cCode), []byte(code))
 	}
 
 	message := "Not logged in"
