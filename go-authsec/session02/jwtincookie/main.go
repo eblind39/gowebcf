@@ -45,7 +45,7 @@ func everything(w http.ResponseWriter, r *http.Request) {
 	// ... and if all is well, then returns no "error" and
 	// type TOKEN which has a field VALID will be true
 
-	isEqual := afterVerificationToken.Valid
+	isEqual := afterVerificationToken.Valid && err == nil
 
 	message := "Not logged in"
 	if isEqual {
