@@ -45,16 +45,15 @@ func everything(w http.ResponseWriter, r *http.Request) {
 	// ... and if all is well, then returns no "error" and
 	// type TOKEN which has a field VALID will be true
 
-	isEqual := afterVerificationToken.Valid && err == nil
+	isEqual := err == nil && afterVerificationToken.Valid
 
 	message := "Not logged in"
 	if isEqual {
 		message = "Logged in"
+		claims := afterVerificationToken.Claims.(*myClaims)
+		fmt.Println(claims.Email)
+		fmt.Println(claims.ExpiresAt)
 	}
-
-	claims := afterVerificationToken.Claims.(*myClaims)
-	fmt.Println(claims.Email)
-	fmt.Println(claims.ExpiresAt)
 
 	html := `<!DOCTYPE html>
 			<html lang="en">
